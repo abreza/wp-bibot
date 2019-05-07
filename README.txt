@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Simply protect your WordPress against spam comments and brute-force attacks!
 
 == Description ==
-Bibot will protect your WordPress! No more spam comments and brute-force attacks against user accounts. Lightweight plugin - just few KBs to download and no ads! BuddyPress and WooCommerce support.
+Bibot will protect your WordPress! No more spam comments and brute-force attacks against user accounts. Lightweight plugin - just few KBs to download and no ads!
 
 Users are required to confirm that they are not a robot before the form can be submitted. It's easy for people and hard for bots.
 
