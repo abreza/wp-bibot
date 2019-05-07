@@ -171,15 +171,21 @@ function bib_verify($input) {
 		$bib_secret_key = filter_var(get_option("bib_secret_key"), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$data = array('response' => $_POST['bibot-response'], 'secretkey' => $bib_secret_key);
 		$options = array(
-			'http' => array(
-				'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-				'method'  => 'POST',
-				'content' => http_build_query($data)
-			)
+			'body' => $data,
+			'timeout' => '5',
+			'redirection' => '5',
+			'httpversion' => '1.0',
+			'blocking' => true,
+			'headers' => array(),
+			'cookies' => array()
 		);
-		$context  = stream_context_create($options);
-		$responseData = json_decode(file_get_contents('https://api.bibot.ir/api1/siteverify/', false, $context));
-		if($responseData->success){
+		$response = wp_remote_post('https://api.bibot.ir/api1/siteverify/', $options);
+		if(is_wp_error($response)) {
+			$error_message = $response->get_error_message();
+			return new WP_Error("bibot", "Something went wrong: $error_message");
+		}
+		$responseData = json_decode(wp_remote_retrieve_body($response));
+		if(!empty($responseData) && $responseData->success){
 			return $input;
 		}
 		else {
