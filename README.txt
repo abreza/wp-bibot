@@ -19,6 +19,8 @@ This WordPress plugin is used by the free [Bibot service](https://bibot.ir) as a
 
 For more information on how it works, refer to [Bibot documents](https://bibot.ir/docs).
 
+You can see our terms of use at [https://bibot.ir/terms_of_use](https://bibot.ir/terms_of_use).
+
 
 
 = What is protected with bibot? =
