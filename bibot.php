@@ -158,13 +158,13 @@ function frontend_bib_script() {
 	}
 
 
-	// function add_async_attribute($tag, $handle) {
-	// 	if ( 'bibot-captcha' == $handle )
-	// 	$tag = str_replace( ' src', ' async="async" src', $tag );
-	// 	return $tag;
-	//
-	// }
-	// add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
+	function add_defer_attribute($tag, $handle) {
+		if ( 'bibot-captcha' == $handle )
+		$tag = str_replace( ' src', ' defer="defer" src', $tag );
+		return $tag;
+
+	}
+	add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
 
 	wp_register_script("bibot-captcha", "https://cdn.bibot.ir/bibot.min.js", array(), false, true);
 	wp_enqueue_script("bibot-captcha");
