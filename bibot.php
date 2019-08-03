@@ -8,7 +8,7 @@
 * registers the activation and deactivation functions, and defines a function
 * that starts the plugin.
 *
-* @link              bibot.ir
+* @link              https://bibot.ir
 * @since             1.0.0
 * @package           Bibot
 *
@@ -18,7 +18,7 @@
 * Description:       Simply protect your WordPress against spam comments and brute-force attacks!
 * Version:           1.0.0
 * Author:            Morteza Abolghasemi
-* Author URI:        bibot.ir
+* Author URI:        https://bibot.ir
 * License:           GPL-2.0+
 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 * Text Domain:       bibot
@@ -49,6 +49,9 @@ if ( ! defined( 'WPINC' ) ) {
 if (!defined('ABSPATH')) {
 	die( 'Direct access not allowed!' );
 }
+
+
+
 
 
 
@@ -155,7 +158,15 @@ function frontend_bib_script() {
 	}
 
 
-	wp_register_script("bibot-captcha", "https://bibot.ir/bibot.min.js");
+	// function add_async_attribute($tag, $handle) {
+	// 	if ( 'bibot-captcha' == $handle )
+	// 	$tag = str_replace( ' src', ' async="async" src', $tag );
+	// 	return $tag;
+	//
+	// }
+	// add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
+
+	wp_register_script("bibot-captcha", "https://cdn.bibot.ir/bibot.min.js", array(), false, true);
 	wp_enqueue_script("bibot-captcha");
 
 	wp_enqueue_style("style", plugin_dir_url(__FILE__)."style.css");
@@ -198,7 +209,7 @@ function bib_verify($input) {
 }
 
 function bib_check() {
-	if (get_option("bib_site_key") && get_option("bib_secret_key") && !function_exists("wpcf7_contact_form_shortcode")) {
+	if (get_option("bib_site_key") && get_option("bib_secret_key") && !is_user_logged_in() && !function_exists("wpcf7_contact_form_shortcode")) {
 		add_action("login_enqueue_scripts", "frontend_bib_script");
 		add_action("wp_enqueue_scripts", "frontend_bib_script");
 
